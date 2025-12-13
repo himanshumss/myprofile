@@ -7,7 +7,7 @@
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -41,203 +41,605 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
 
-        /* Skill bar animation */
-        .skill-bar {
-            animation: fill 1.5s ease forwards;
+        /* Print styles - Enhanced for better PDF with proper page breaks */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 12pt;
+                line-height: 1.4;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* Hide non-printable elements */
+            .no-print {
+                display: none !important;
+            }
+            
+            /* Main container */
+            #resume-content {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                background: white !important;
+            }
+            
+            /* Allow page breaks within sections but avoid within cards */
+            section {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+            
+            /* Prevent cards from breaking, but allow them to move to next page */
+            .card {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin-bottom: 15px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            /* Allow headings to stay with content */
+            h2 {
+                page-break-after: avoid !important;
+                break-after: avoid !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                margin-top: 20px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            /* Allow content to flow naturally */
+            .grid, .flex {
+                page-break-inside: auto !important;
+                break-inside: auto !important;
+            }
+            
+            /* Header styling for print */
+            header {
+                background: linear-gradient(to right, #1e3a8a, #1e40af) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color: white !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Ensure background colors print */
+            .bg-blue-100, .bg-gray-50, .bg-green-100 {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Links in print */
+            a {
+                color: black !important;
+                text-decoration: none !important;
+            }
+            
+            /* Lists */
+            ul {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Images */
+            img {
+                max-width: 100% !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            
+            /* Footer for print */
+            footer {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                border-top: 1px solid #ddd !important;
+                margin-top: 20px !important;
+            }
+            
+            /* Hide animations in print */
+            .animate-float, .animate-slideDown, .fade-in {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            
+            /* Better spacing for print */
+            .p-8, .px-8, .pb-8, .pb-10 {
+                padding: 20px !important;
+            }
+            
+            /* Margin adjustments */
+            .my-10 {
+                margin: 0 !important;
+            }
+            
+            /* Grid gap adjustments */
+            .gap-4, .gap-6 {
+                gap: 10px !important;
+            }
+            
+            /* Section spacing */
+            section {
+                margin-bottom: 15px !important;
+            }
+            
+            /* Ensure text is readable */
+            .text-sm {
+                font-size: 11pt !important;
+            }
+            
+            .text-lg {
+                font-size: 14pt !important;
+            }
+            
+            .text-2xl {
+                font-size: 18pt !important;
+            }
+            
+            .text-4xl, .text-5xl {
+                font-size: 24pt !important;
+            }
+            
+            /* Force minimal margins */
+            @page {
+                margin: 0.5in !important;
+            }
+            
+            /* Avoid orphans and widows */
+            p, li {
+                orphans: 3;
+                widows: 3;
+            }
         }
 
-        @keyframes fill {
+        /* Animation for float */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-slideDown {
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        @keyframes slideDown {
             from {
-                width: 0;
+                opacity: 0;
+                transform: translateY(-20px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Download button styles */
+        #downloadPdf {
+            transition: all 0.3s ease;
+        }
+        
+        #downloadPdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+        
+        #downloadPdf:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
     </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-50 text-gray-800">
 
-    <div class="max-w-6xl mx-auto my-10 bg-white shadow-xl rounded-lg overflow-hidden fade-in">
+    <div id="resume-content" class="max-w-6xl mx-auto my-10 bg-white shadow-lg rounded-lg overflow-hidden fade-in">
 
-        <!-- Header -->
-        <header class="bg-blue-900 text-white p-8 flex flex-col md:flex-row items-center gap-6">
-            <div class="w-32 h-32 rounded-full bg-white overflow-hidden flex items-center justify-center">
-                <img src="passportpik.jpg"
-                    alt="Himanshu Sharma" class="w-full h-full object-cover">
-            </div>
+        <!-- Header - Professional Design -->
+        <header class="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-8">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <!-- Profile image -->
+                <div class="relative">
+                    <div class="w-36 h-36 rounded-full bg-white border-4 border-white overflow-hidden shadow-xl animate-float">
+                        <img src="https://drive.google.com/uc?export=view&id=1rIqiByAlDkRlwp1aiCfB90Fcgfqx2fBL"
+                            alt="Himanshu Sharma" class="w-full h-full object-cover" id="profileImage">
+                    </div>
+                </div>
 
-            <div>
-                <h1 class="text-3xl font-bold">Himanshu Sharma</h1>
-                <p class="text-lg">Django Developer | Computer Teacher</p>
-                <p class="text-sm mt-2">
-                    📧 report2himanshusharma@email.com | 📞 +91-9997604604 | 📍 India
-                </p>
+                <!-- Content -->
+                <div class="flex-1 text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2 animate-slideDown">
+                        Himanshu Sharma
+                    </h1>
+                    
+                    <div class="inline-block px-4 py-1 bg-white/20 rounded-full mb-4">
+                        <p class="text-lg font-semibold">Django Developer | Computer Teacher</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start text-sm">
+                        <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg">
+                            <span class="bg-white/20 p-1.5 rounded">📧</span>
+                            <span>report2himanshusharma@email.com</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg">
+                            <span class="bg-white/20 p-1.5 rounded">📞</span>
+                            <span>+91-9997604604</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/10 px-3 py-2 rounded-lg">
+                            <span class="bg-white/20 p-1.5 rounded">📍</span>
+                            <span>India</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-3 mt-4 justify-center md:justify-start">
+                        <a href="https://github.com/yourusername" target="_blank" class="no-print p-2 bg-white/20 rounded-full hover:bg-white/30 transition hover:scale-110">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" class="no-print p-2 bg-white/20 rounded-full hover:bg-white/30 transition hover:scale-110">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Introduction -->
         <section class="p-8 fade-in">
-            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block pb-1">
                 Professional Summary
             </h2>
-            <p class="mt-4 text-sm leading-relaxed">
+            <p class="mt-4 text-gray-600 leading-relaxed">
                 Experienced computer teacher and Django developer with strong expertise
                 in academic software systems and real-world web applications. Proven
                 ability to design, develop, and deploy scalable solutions such as College
                 ERP, attendance automation, fee management, and API-enabled platforms.
+                Passionate about creating efficient systems and mentoring students in
+                modern web technologies.
             </p>
         </section>
 
         <!-- Skills -->
         <section class="px-8 pb-8 fade-in">
-            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
-                Skills
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block pb-1 mb-4">
+                Technical Skills
             </h2>
 
-            <div class="grid md:grid-cols-2 gap-4 text-sm">
-
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Backend Development</h3>
-                    <p class="mt-2">
-                        Python, Django, Custom Authentication, REST APIs, Business Logic
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">⚙️</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Backend Development</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Python, Django, REST APIs, Custom Authentication, Business Logic, API Integration
                     </p>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Frontend Development</h3>
-                    <p class="mt-2">
-                        HTML5, CSS3, Tailwind CSS, Bootstrap, Responsive Design
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">🎨</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Frontend Development</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        HTML5, CSS3, Tailwind CSS, Bootstrap, Responsive Design, JavaScript Basics
                     </p>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Databases</h3>
-                    <p class="mt-2">
-                        MySQL, SQLite, Database Design, Query Optimization
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">🗄️</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Databases</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        MySQL, SQLite, Database Design, Query Optimization, Data Modeling
                     </p>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Tools & Technologies</h3>
-                    <p class="mt-2">
-                        Git, GitHub, VS Code, Windows, API Integration
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">🛠️</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Tools & Technologies</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Git, GitHub, VS Code, Postman, Windows OS, API Testing
                     </p>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Teaching & Mentoring</h3>
-                    <p class="mt-2">
-                        Programming Concepts, DBMS, Software Engineering,
-                        Student Project Guidance
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">👨‍🏫</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Teaching & Mentoring</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        Programming Concepts, DBMS, Software Engineering, Project Guidance, Curriculum Development
                     </p>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold text-blue-900">Additional Skills</h3>
-                    <p class="mt-2">
-                        System Analysis, Documentation, Debugging,
-                        Academic Project Development
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-blue-900 font-bold">📊</span>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Additional Skills</h3>
+                    </div>
+                    <p class="text-gray-600">
+                        System Analysis, Documentation, Debugging, Academic Project Development, Technical Writing
                     </p>
                 </div>
-
             </div>
         </section>
 
-
         <!-- Experience -->
         <section class="px-8 pb-8 fade-in">
-            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block pb-1 mb-4">
                 Work Experience
             </h2>
 
-            <div class="space-y-4 text-sm">
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold">Computer Teacher</h3>
-                    <p class="text-gray-600">2012 – Present</p>
-                    <p class="mt-2">
-                        Teaching undergraduate and school-level computer science subjects
-                        including Programming, DBMS, Web Development, Software Engineering,
-                        and Digital Electronics. Mentored students in project development.
-                    </p>
+            <div class="space-y-4">
+                <div class="card bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-semibold text-lg text-blue-900">Computer Teacher</h3>
+                            <p class="text-gray-500 text-sm">2012 – Present</p>
+                        </div>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded-full">Full-time</span>
+                    </div>
+                    <ul class="mt-3 space-y-1 text-gray-600 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Teaching undergraduate and school-level computer science subjects including Programming, DBMS, Web Development
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Mentored 100+ students in project development and software engineering concepts
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Developed customized curriculum for computer science courses
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="card bg-gray-50 p-4 rounded">
-                    <h3 class="font-semibold">Django Developer (Freelance / Academic)</h3>
-                    <p class="text-gray-600">Project-Based</p>
-                    <p class="mt-2">
-                        Designed and implemented Django applications such as College ERP,
-                        attendance systems, fee management modules, and chat applications
-                        with custom authentication and database design.
-                    </p>
+                <div class="card bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-semibold text-lg text-blue-900">Django Developer</h3>
+                            <p class="text-gray-500 text-sm">Project-Based | Freelance / Academic</p>
+                        </div>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded-full">Freelance</span>
+                    </div>
+                    <ul class="mt-3 space-y-1 text-gray-600 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Designed and implemented Django applications including College ERP systems
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Developed attendance automation and fee management modules with custom authentication
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            Created RESTful APIs for various academic management platforms
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- Education -->
         <section class="px-8 pb-8 fade-in">
-            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
-                Education / Qualification
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block pb-1 mb-4">
+                Education
             </h2>
 
-            <div class="card bg-gray-50 p-4 rounded text-sm">
-                <h3 class="font-semibold">Bachelor of Computer Applications (BCA)</h3>
-                <p class="text-gray-600">Completed – 2012</p>
-                <p class="mt-2">
-                    Studied core computer science subjects including Programming,
-                    Data Structures, DBMS, Operating Systems, and Software Engineering.
-                </p>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-blue-900 font-bold">🎓</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-blue-900">Bachelor of Computer Applications (BCA)</h3>
+                            <p class="text-gray-500 text-xs mt-1">CCS University • Completed 2012</p>
+                            <p class="text-gray-600 text-xs mt-1">
+                                Core studies in Programming, Data Structures, DBMS, Operating Systems, and Software Engineering.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-blue-900 font-bold">📚</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-blue-900">Master of Computer Applications (MCA)</h3>
+                            <p class="text-gray-500 text-xs mt-1">Monad University • Completed 2016</p>
+                            <p class="text-gray-600 text-xs mt-1">
+                                Advanced studies in computer science with focus on modern software development methodologies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200 md:col-span-2">
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-blue-900 font-bold">🚀</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-blue-900">Master of Science in Computer Science (M.Sc (CS))</h3>
+                            <p class="text-gray-500 text-xs mt-1">Motherhood University • 2025 - 2027 (Pursuing)</p>
+                            <p class="text-gray-600 text-xs mt-1">
+                                Currently pursuing advanced degree focusing on contemporary computer science theories and applications.
+                            </p>
+                        </div>
+                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full self-start">In Progress</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Projects -->
-        <section class="px-8 pb-10 fade-in">
-            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-6">
-                Projects (GitHub)
+        <section class="px-8 pb-8 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block pb-1 mb-4">
+                Featured Projects
             </h2>
 
-            <div class="grid md:grid-cols-2 gap-6">
-
-                <div class="card bg-gray-50 p-6 rounded">
-                    <h3 class="font-semibold text-blue-900">College Management System</h3>
-                    <p class="text-sm mt-2">
-                        Full-featured ERP system with student, staff, attendance, exam,
-                        fee management, notices, and role-based access.
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-start justify-between">
+                        <h3 class="font-semibold text-blue-900">College Management System</h3>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded">ERP</span>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-2">
+                        Full-featured ERP system with student management, staff records, attendance tracking, exam management, fee processing, and role-based access control.
                     </p>
-                    <p class="text-xs text-gray-600 mt-2">
-                        Tech: Django, Python, MySQL, Bootstrap
-                    </p>
-                    <a href="https://github.com/yourusername/college-erp" target="_blank"
-                        class="inline-block mt-4 px-4 py-2 bg-blue-900 text-white text-sm rounded hover:bg-blue-700 transition">
-                        View on GitHub
-                    </a>
+                    <div class="flex flex-wrap gap-1 mt-3">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Django</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Python</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">MySQL</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Bootstrap</span>
+                    </div>
                 </div>
 
-                <div class="card bg-gray-50 p-6 rounded">
-                    <h3 class="font-semibold text-blue-900">Attendance Management System</h3>
-                    <p class="text-sm mt-2">
-                        Class-wise attendance marking for multiple students from a single
-                        interface with database-driven reporting.
+                <div class="card bg-gray-50 p-5 rounded-lg border border-gray-200">
+                    <div class="flex items-start justify-between">
+                        <h3 class="font-semibold text-blue-900">Attendance Management System</h3>
+                        <span class="px-2 py-1 bg-blue-100 text-blue-900 text-xs font-medium rounded">Automation</span>
+                    </div>
+                    <p class="text-gray-600 text-xs mt-2">
+                        Class-wise attendance marking system supporting multiple students from single interface with automated reporting, analytics, and database-driven management.
                     </p>
-                    <p class="text-xs text-gray-600 mt-2">
-                        Tech: Django, Tailwind, SQLite
-                    </p>
-                    <a href="https://github.com/yourusername/attendance-app" target="_blank"
-                        class="inline-block mt-4 px-4 py-2 bg-blue-900 text-white text-sm rounded hover:bg-blue-700 transition">
-                        View on GitHub
-                    </a>
+                    <div class="flex flex-wrap gap-1 mt-3">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Django</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Tailwind CSS</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">SQLite</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">REST API</span>
+                    </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="bg-gray-100 text-center text-sm p-4">
-            © 2025 Himanshu Sharma | Portfolio Website
+        <!-- Footer with Download Button -->
+        <footer class="bg-gray-100 text-center p-6 border-t border-gray-200 no-print">
+            <div class="max-w-3xl mx-auto">
+                <!-- Download PDF Button -->
+                <div class="mb-6">
+                    <button id="downloadPdf" class="no-print bg-blue-900 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-800 transition flex items-center gap-2 mx-auto">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        Download Resume as PDF
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2">Click to download a printable version of this resume</p>
+                </div>
+                
+                <!-- Copyright and Links -->
+                <p class="text-gray-600">© 2025 Himanshu Sharma | Portfolio Website</p>
+                <p class="text-gray-500 text-xs mt-2">Built with Django, Tailwind CSS, and modern web technologies</p>
+                
+                <!-- Contact Links -->
+                <div class="flex justify-center gap-4 mt-4 no-print">
+                    <a href="mailto:report2himanshusharma@email.com" class="text-blue-900 hover:text-blue-700 text-sm flex items-center gap-1">
+                        <span>📧</span> Email
+                    </a>
+                    <span class="text-gray-300">|</span>
+                    <a href="https://github.com/yourusername" target="_blank" class="text-blue-900 hover:text-blue-700 text-sm flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <span class="text-gray-300">|</span>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-blue-900 hover:text-blue-700 text-sm flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
         </footer>
 
     </div>
 
+    <script>
+        // Simple PDF Download using browser's print to PDF
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            const button = this;
+            
+            // Show loading state
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span>Opening print dialog...</span>';
+            button.disabled = true;
+            
+            // Set print-friendly title
+            const originalTitle = document.title;
+            document.title = "Himanshu Sharma - Resume";
+            
+            // Add a small delay to ensure title change takes effect
+            setTimeout(() => {
+                // Trigger browser's print dialog (users can choose "Save as PDF")
+                window.print();
+                
+                // Restore button after a short delay
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                    document.title = originalTitle;
+                }, 1000);
+            }, 100);
+        });
+        
+        // Keyboard shortcut for printing (Ctrl+P or Cmd+P)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                e.preventDefault();
+                const originalTitle = document.title;
+                document.title = "Himanshu Sharma - Resume";
+                window.print();
+                setTimeout(() => {
+                    document.title = originalTitle;
+                }, 1000);
+            }
+        });
+        
+        // Ensure images load before printing
+        window.addEventListener('beforeprint', function() {
+            // Force image to load if needed
+            const img = document.getElementById('profileImage');
+            if (img) {
+                img.src = img.src; // Refresh image source
+            }
+        });
+    </script>
+
 </body>
 
-
 </html>
-
