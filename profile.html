@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Himanshu Sharma | Portfolio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card hover */
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Skill bar animation */
+        .skill-bar {
+            animation: fill 1.5s ease forwards;
+        }
+
+        @keyframes fill {
+            from {
+                width: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="max-w-6xl mx-auto my-10 bg-white shadow-xl rounded-lg overflow-hidden fade-in">
+
+        <!-- Header -->
+        <header class="bg-blue-900 text-white p-8 flex flex-col md:flex-row items-center gap-6">
+            <div class="w-32 h-32 rounded-full bg-white overflow-hidden flex items-center justify-center">
+                <img src="https://drive.google.com/uc?export=view&id=1rIqiByAlDkRlwp1aiCfB90Fcgfqx2fBL"
+                    alt="Himanshu Sharma" class="w-full h-full object-cover">
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-bold">Himanshu Sharma</h1>
+                <p class="text-lg">Django Developer | Computer Teacher</p>
+                <p class="text-sm mt-2">
+                    📧 report2himanshusharma@email.com | 📞 +91-9997604604 | 📍 India
+                </p>
+            </div>
+        </header>
+
+        <!-- Introduction -->
+        <section class="p-8 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block">
+                Professional Summary
+            </h2>
+            <p class="mt-4 text-sm leading-relaxed">
+                Experienced computer teacher and Django developer with strong expertise
+                in academic software systems and real-world web applications. Proven
+                ability to design, develop, and deploy scalable solutions such as College
+                ERP, attendance automation, fee management, and API-enabled platforms.
+            </p>
+        </section>
+
+        <!-- Skills -->
+        <section class="px-8 pb-8 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
+                Skills
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Backend Development</h3>
+                    <p class="mt-2">
+                        Python, Django, Custom Authentication, REST APIs, Business Logic
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Frontend Development</h3>
+                    <p class="mt-2">
+                        HTML5, CSS3, Tailwind CSS, Bootstrap, Responsive Design
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Databases</h3>
+                    <p class="mt-2">
+                        MySQL, SQLite, Database Design, Query Optimization
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Tools & Technologies</h3>
+                    <p class="mt-2">
+                        Git, GitHub, VS Code, Windows, API Integration
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Teaching & Mentoring</h3>
+                    <p class="mt-2">
+                        Programming Concepts, DBMS, Software Engineering,
+                        Student Project Guidance
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold text-blue-900">Additional Skills</h3>
+                    <p class="mt-2">
+                        System Analysis, Documentation, Debugging,
+                        Academic Project Development
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Experience -->
+        <section class="px-8 pb-8 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
+                Work Experience
+            </h2>
+
+            <div class="space-y-4 text-sm">
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold">Computer Teacher</h3>
+                    <p class="text-gray-600">2012 – Present</p>
+                    <p class="mt-2">
+                        Teaching undergraduate and school-level computer science subjects
+                        including Programming, DBMS, Web Development, Software Engineering,
+                        and Digital Electronics. Mentored students in project development.
+                    </p>
+                </div>
+
+                <div class="card bg-gray-50 p-4 rounded">
+                    <h3 class="font-semibold">Django Developer (Freelance / Academic)</h3>
+                    <p class="text-gray-600">Project-Based</p>
+                    <p class="mt-2">
+                        Designed and implemented Django applications such as College ERP,
+                        attendance systems, fee management modules, and chat applications
+                        with custom authentication and database design.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="px-8 pb-8 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-4">
+                Education / Qualification
+            </h2>
+
+            <div class="card bg-gray-50 p-4 rounded text-sm">
+                <h3 class="font-semibold">Bachelor of Computer Applications (BCA)</h3>
+                <p class="text-gray-600">Completed – 2012</p>
+                <p class="mt-2">
+                    Studied core computer science subjects including Programming,
+                    Data Structures, DBMS, Operating Systems, and Software Engineering.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="px-8 pb-10 fade-in">
+            <h2 class="text-2xl font-semibold border-b-2 border-blue-900 inline-block mb-6">
+                Projects (GitHub)
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <div class="card bg-gray-50 p-6 rounded">
+                    <h3 class="font-semibold text-blue-900">College Management System</h3>
+                    <p class="text-sm mt-2">
+                        Full-featured ERP system with student, staff, attendance, exam,
+                        fee management, notices, and role-based access.
+                    </p>
+                    <p class="text-xs text-gray-600 mt-2">
+                        Tech: Django, Python, MySQL, Bootstrap
+                    </p>
+                    <a href="https://github.com/yourusername/college-erp" target="_blank"
+                        class="inline-block mt-4 px-4 py-2 bg-blue-900 text-white text-sm rounded hover:bg-blue-700 transition">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="card bg-gray-50 p-6 rounded">
+                    <h3 class="font-semibold text-blue-900">Attendance Management System</h3>
+                    <p class="text-sm mt-2">
+                        Class-wise attendance marking for multiple students from a single
+                        interface with database-driven reporting.
+                    </p>
+                    <p class="text-xs text-gray-600 mt-2">
+                        Tech: Django, Tailwind, SQLite
+                    </p>
+                    <a href="https://github.com/yourusername/attendance-app" target="_blank"
+                        class="inline-block mt-4 px-4 py-2 bg-blue-900 text-white text-sm rounded hover:bg-blue-700 transition">
+                        View on GitHub
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-100 text-center text-sm p-4">
+            © 2025 Himanshu Sharma | Portfolio Website
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
